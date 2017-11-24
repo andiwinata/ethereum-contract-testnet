@@ -1,8 +1,8 @@
 // Allows us to use ES6 in our migrations and tests.
 require('babel-register');
 require('dotenv').config();
-const HDWalletProvider = require("truffle-hdwallet-provider");
-const mnemonic = process.env.MNEMONIC
+const HDWalletProvider = require('truffle-hdwallet-provider');
+const mnemonic = process.env.MNEMONIC;
 
 module.exports = {
   networks: {
@@ -13,11 +13,11 @@ module.exports = {
       gas: 470000,
     },
     ropsten: {
-      provider: function () {
-        return new HDWalletProvider(mnemonic, `https://ropsten.infura.io/${process.env.INFURA_TOKEN}`)
+      provider: function() {
+        return new HDWalletProvider(mnemonic, `https://ropsten.infura.io/${process.env.INFURA_TOKEN}`);
       },
       network_id: 3,
-      gas: 470000,      
-    }
+      gas: 470000,
+    },
   },
 };
