@@ -33,7 +33,7 @@ window.voteForCandidate = async () => {
      * everywhere we have a transaction call
      */
     const contractInstance = await Voting.deployed();
-    await contractInstance.voteForCandidate(candidateName, { gas: 140000, from: web3.eth.accounts[0] });
+    await contractInstance.voteForCandidate(candidateName, { gas: 140000, from: window.web3.eth.accounts[0] });
 
     const divId = candidates[candidateName];
     const v = await contractInstance.totalVotesFor.call(candidateName);
