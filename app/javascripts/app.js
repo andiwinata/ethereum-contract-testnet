@@ -1,9 +1,9 @@
 // Import the page's CSS. Webpack will know what to do with it.
-import '../stylesheets/app.css';
+import "../stylesheets/app.css";
 
 // Import libraries we need.
-import { default as Web3 } from 'web3';
-import { default as contract } from 'truffle-contract';
+import { default as Web3} from 'web3';
+import { default as contract } from 'truffle-contract'
 
 /*
  * When you compile and deploy your Voting contract,
@@ -15,57 +15,55 @@ import { default as contract } from 'truffle-contract';
  * https://gist.github.com/maheshmurthy/f6e96d6b3fff4cd4fa7f892de8a1a1b4#file-index-js
  */
 
-import voting_artifacts from '../../build/contracts/Voting.json';
+import voting_artifacts from '../../build/contracts/Voting.json'
 
-const Voting = contract(voting_artifacts);
-const candidates = { Jack: 'candidate-1', John: 'candidate-2', Jose: 'candidate-3' };
+var Voting = contract(voting_artifacts);
 
-window.voteForCandidate = async () => {
-  const candidateName = $('#candidate').val();
+let candidates = {"Rama": "candidate-1", "Nick": "candidate-2", "Jose": "candidate-3"}
+
+window.voteForCandidate = function(candidate) {
+  let candidateName = $("#candidate").val();
   try {
-    $('#msg').html(
-      'Vote has been submitted. The vote count will increment as soon as the vote is recorded on the blockchain. Please wait.'
-    );
-    $('#candidate').val('');
+    $("#msg").html("Vote has been submitted. The vote count will increment as soon as the vote is recorded on the blockchain. Please wait.")
+    $("#candidate").val("");
 
     /* Voting.deployed() returns an instance of the contract. Every call
      * in Truffle returns a promise which is why we have used then()
      * everywhere we have a transaction call
      */
-    const contractInstance = await Voting.deployed();
-    await contractInstance.voteForCandidate(candidateName, { gas: 140000, from: window.web3.eth.accounts[0] });
-
-    const divId = candidates[candidateName];
-    const v = await contractInstance.totalVotesFor.call(candidateName);
-
-    $('#' + divId).html(v.toString());
-    $('#msg').html('');
+    Voting.deployed().then(function(contractInstance) {
+      contractInstance.voteForCandidate(candidateName, {gas: 140000, from: web3.eth.accounts[0]}).then(function() {
+        let div_id = candidates[candidateName];
+        return contractInstance.totalVotesFor.call(candidateName).then(function(v) {
+          $("#" + div_id).html(v.toString());
+          $("#msg").html("");
+        });
+      });
+    });
   } catch (err) {
     console.log(err);
   }
-};
+}
 
-$(document).ready(async () => {
+$( document ).ready(function() {
   if (typeof web3 !== 'undefined') {
-    console.warn('Using web3 detected from external source like Metamask');
+    console.warn("Using web3 detected from external source like Metamask")
     // Use Mist/MetaMask's provider
     window.web3 = new Web3(web3.currentProvider);
   } else {
-    console.warn(
-      "No web3 detected. Falling back to http://localhost:8545. You should remove this fallback when you deploy live, as it's inherently insecure. Consider switching to Metamask for development. More info here: http://truffleframework.com/tutorials/truffle-and-metamask"
-    );
+    console.warn("No web3 detected. Falling back to http://localhost:8545. You should remove this fallback when you deploy live, as it's inherently insecure. Consider switching to Metamask for development. More info here: http://truffleframework.com/tutorials/truffle-and-metamask");
     // fallback - use your fallback strategy (local node / hosted node + in-dapp id mgmt / fail)
-    window.web3 = new Web3(new Web3.providers.HttpProvider('http://localhost:8545'));
+    window.web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
   }
 
   Voting.setProvider(web3.currentProvider);
-  const candidateNames = Object.keys(candidates);
-
+  let candidateNames = Object.keys(candidates);
   for (var i = 0; i < candidateNames.length; i++) {
     let name = candidateNames[i];
-    const contractInstance = await Voting.deployed();
-
-    const v = await contractInstance.totalVotesFor.call(name);
-    $('#' + candidates[name]).html(v.toString());
+    Voting.deployed().then(function(contractInstance) {
+      contractInstance.totalVotesFor.call(name).then(function(v) {
+        $("#" + candidates[name]).html(v.toString());
+      });
+    })
   }
 });
