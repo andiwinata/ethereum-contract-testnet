@@ -67,6 +67,15 @@ ajv@^5.0.0, ajv@^5.1.0, ajv@^5.1.5:
     fast-json-stable-stringify "^2.0.0"
     json-schema-traverse "^0.3.0"
 
+ajv@^5.1.1:
+  version "5.5.0"
+  resolved "https://registry.yarnpkg.com/ajv/-/ajv-5.5.0.tgz#eb2840746e9dc48bd5e063a36e3fd400c5eab5a9"
+  dependencies:
+    co "^4.6.0"
+    fast-deep-equal "^1.0.0"
+    fast-json-stable-stringify "^2.0.0"
+    json-schema-traverse "^0.3.0"
+
 align-text@^0.1.1, align-text@^0.1.3:
   version "0.1.4"
   resolved "https://registry.yarnpkg.com/align-text/-/align-text-0.1.4.tgz#0cd90a561093f35d0a99256c22b7069433fad117"
@@ -5013,26 +5022,27 @@ trim@0.0.1:
   version "0.0.1"
   resolved "https://registry.yarnpkg.com/trim/-/trim-0.0.1.tgz#5858547f6b290757ee95cccc666fb50084c460dd"
 
-truffle-blockchain-utils@0.0.1:
-  version "0.0.1"
-  resolved "https://registry.yarnpkg.com/truffle-blockchain-utils/-/truffle-blockchain-utils-0.0.1.tgz#07a58e55bb0555a64208c9119c0b04ffe1464aa4"
+truffle-blockchain-utils@^0.0.3:
+  version "0.0.3"
+  resolved "https://registry.yarnpkg.com/truffle-blockchain-utils/-/truffle-blockchain-utils-0.0.3.tgz#ae8a111ec124d96504f0e042c6f205c0b3817e29"
   dependencies:
-    web3 "^0.18.0"
+    web3 "^0.20.1"
 
-truffle-contract-schema@0.0.5:
-  version "0.0.5"
-  resolved "https://registry.yarnpkg.com/truffle-contract-schema/-/truffle-contract-schema-0.0.5.tgz#5e9d20bd0bf2a27fe94310748249d484eee49961"
+truffle-contract-schema@^1.0.0:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/truffle-contract-schema/-/truffle-contract-schema-1.0.1.tgz#08ceaefe71062a8ac9ab881a77a30fda3744176e"
   dependencies:
+    ajv "^5.1.1"
     crypto-js "^3.1.9-1"
 
-truffle-contract@^1.1.11:
-  version "1.1.11"
-  resolved "https://registry.yarnpkg.com/truffle-contract/-/truffle-contract-1.1.11.tgz#ce1fa787f797758aff572f45e8b1174527f6edaa"
+truffle-contract@^3.0.1:
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/truffle-contract/-/truffle-contract-3.0.1.tgz#7fd0395571b0c011afb809cbd6441d553e793201"
   dependencies:
     ethjs-abi "0.1.8"
-    truffle-blockchain-utils "0.0.1"
-    truffle-contract-schema "0.0.5"
-    web3 "^0.16.0"
+    truffle-blockchain-utils "^0.0.3"
+    truffle-contract-schema "^1.0.0"
+    web3 "^0.20.1"
 
 truffle-hdwallet-provider@^0.0.3:
   version "0.0.3"
@@ -5262,7 +5272,7 @@ web3@^0.16.0:
     utf8 "^2.1.1"
     xmlhttprequest "*"
 
-web3@^0.18.0, web3@^0.18.2:
+web3@^0.18.2:
   version "0.18.4"
   resolved "https://registry.yarnpkg.com/web3/-/web3-0.18.4.tgz#81ec1784145491f2eaa8955b31c06049e07c5e7d"
   dependencies:
@@ -5272,7 +5282,7 @@ web3@^0.18.0, web3@^0.18.2:
     xhr2 "*"
     xmlhttprequest "*"
 
-web3@^0.20.0:
+web3@^0.20.0, web3@^0.20.1:
   version "0.20.2"
   resolved "https://registry.yarnpkg.com/web3/-/web3-0.20.2.tgz#c54dac5fc0e377399c04c1a6ecbb12e4513278d6"
   dependencies:
